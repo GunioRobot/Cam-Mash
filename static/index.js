@@ -2,14 +2,14 @@
 $(document).ready(function() {
  $('#goButton').click(function() {
         var tags = $("#tags").text();
-        
+
         if (tags == ""){
             alert ("Enter some tags.");
         }
-        
-        
-            
-     
+
+
+
+
  });
 });
 

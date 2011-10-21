@@ -9,7 +9,7 @@ urls = (
   '/call', 'call',
 )
 
-def render_template(name, *args, **kw): 
+def render_template(name, *args, **kw):
     #TODO: find better way to embed templates by name
     return getattr(web.template.render("templates", globals={"render_template": render_template}),name)()
 
@@ -37,7 +37,7 @@ class listen:
 class call:
     def GET(self):
         return render.call()
-# 
+#
 # class list:
 #     def GET(self):
 #         # people = db.GqlQuery("SELECT * FROM Person ORDER BY created DESC LIMIT 10")

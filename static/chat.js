@@ -1,8 +1,8 @@
 function setUpChat() {
     $('#chatSubmit').click(sendChat);
-    
+
     $('#chatLine').keypress(function (e) {
-        if (e.keyCode == 13) 
+        if (e.keyCode == 13)
             sendChat();
     });
 }
@@ -19,7 +19,7 @@ function appendChatLine(user, text) {
     newP.addClass("chatLineP");
 
     $('#chatLog').append(newP);
-    
+
     //Scrolls to the bottom of chatLog div
     //Thanks, http://kisdigital.wordpress.com/2010/03/10/using-jquery-to-scroll-to-the-bottom-of-a-div-revised/#comments
     $("#chatLog").animate({ scrollTop: $("#chatLog").attr("scrollHeight") - $('#chatLog').height() }, 500);
@@ -27,13 +27,13 @@ function appendChatLine(user, text) {
 
 function sendChat() {
     var chatLine = $('#chatLine').val();
-    
+
     if (chatLine == "") return;
 
     $("#content").get()[0].chatSend(chatLine);
-    
+
     appendChatLine("Me", chatLine);
-    
+
     $('#chatLine').val('');
     $('#chatLine').focus();
 }

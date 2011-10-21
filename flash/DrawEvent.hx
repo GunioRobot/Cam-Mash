@@ -10,7 +10,7 @@ class DrawEvent extends Event {
 
     public function new(penSize:Int, color:Dynamic, points:Array<Array<Int>>) {
         super("DrawEvent");
-        
+
         this.penSize = penSize;
         this.color = color;
         this.points = points;

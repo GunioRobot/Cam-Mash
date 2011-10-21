@@ -27,7 +27,7 @@ class StratusTest {
 
     static var RTMFP_SERVER = "rtmfp://stratus.adobe.com/";
     static var DEV_KEY = "2eba02516e9fe7dca439d4be-55fd60f89cb3";
-    
+
     static var SWF_WIDTH = 750;
     static var SWF_HEIGHT = 550;
 
@@ -50,7 +50,7 @@ class StratusTest {
     var outgoing_ns:NetStream;
 
     var listener:Bool;
-    
+
     var whiteboard:Whiteboard;
 
     static function main(){
@@ -62,7 +62,7 @@ class StratusTest {
 
         ExternalInterface.addCallback("startAsListener",startAsListener);
         ExternalInterface.addCallback("startAsConnector",startAsConnector);
-        
+
         ExternalInterface.addCallback("chatSend", sendChatMessageFromJS);
 
         var vid_width:Int = cast(320*1.0,Int);
@@ -91,24 +91,24 @@ class StratusTest {
             /* Attach the loopback video feed so the client can see themself */
             localVideo.attachCamera(cam);
     }
-    
+
     function initWhiteboard() {
         whiteboard = new Whiteboard(400,500);
-        
+
         whiteboard.addEventListener(DrawEvent.DRAW, onWhiteboardDraw);
-        
+
         current.addChild(whiteboard);
 
         whiteboard.x = 320+15;
         whiteboard.y = 10;
     }
-    
-    function onWhiteboardDraw(e:DrawEvent) {        
-        if (outgoing_ns != null)        
+
+    function onWhiteboardDraw(e:DrawEvent) {
+        if (outgoing_ns != null)
             outgoing_ns.send("gotWhiteboardUpdate", {
                color : e.color,
                penSize : e.penSize,
-               points : e.points 
+               points : e.points
             });
     }
 
@@ -151,7 +151,7 @@ class StratusTest {
             // uncompressed (false). Compression requires substantially more
             // computation than just displaying the uncompressed stream so we
             // should leave this set to false.
-            cam.setLoopback(false); 
+            cam.setLoopback(false);
         }
     }
 
@@ -173,7 +173,7 @@ class StratusTest {
          // XXX: Grab actual video dimensions somehow.. and come
          //      up with a better way of laying things out. Flex?
          var chat_container = new MovieClip();
-         
+
          var vid_width = 320;
          var vid_height = 240;
 
@@ -184,7 +184,7 @@ class StratusTest {
          chatlog = new TextField();
          chatlog.width = vid_width-5;
          chatlog.height = vid_height - 30;
-         
+
          chatlog.x = vid_width + 2;
          chatlog.y = vid_height;
          chatlog.border = true;
@@ -211,9 +211,9 @@ class StratusTest {
          // Add Fields to stage
          chat_container.addChild(chatlog);
          chat_container.addChild(chatinput);
-         
+
          current.addChild(chat_container);
-         
+
          chat_container.x = vid_width/3 - 100;
          chat_container.y = vid_width/3 - 50;
 
@@ -373,7 +373,7 @@ class StratusTest {
             chatlog.scrollV = chatlog.maxScrollV;
         }
     }*/
-    
+
     function sendChatMessageFromJS(text) {
         if (text != "") {
             if (outgoing_ns != null) {
@@ -386,7 +386,7 @@ class StratusTest {
     function gotChatMessage(str:String) {
 /*        chatlog.text += "\r Stranger: " + str;*/
 /*        chatlog.scrollV = chatlog.maxScrollV;*/
-        
+
         ExternalInterface.call("getChatLine", str);
     }
 
